@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["ToDoApi.csproj", "./"]
-RUN dotnet restore "./ToDoApi.csproj"
+RUN dotnet restore "ToDoApi.csproj"
 COPY . .
 RUN dotnet build "ToDoApi.csproj" -c Release -o /app/build
 
