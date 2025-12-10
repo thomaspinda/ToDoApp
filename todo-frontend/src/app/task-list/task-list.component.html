@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Lista de tareas</h2>
+    <div class="add-tast">
+        <input type="text" 
+        placeholder="Nueva tarea" 
+        [(ngModel)]="newTaskDescription" />
+        <button (click)="addTask()">Agregar</button>
+    </div>
+    <hr>
+    <ul>
+        <li *ngFor="let task of tasks">
+            <span [class.completed]="task.isCompleted">
+                {{ task.description }}
+            </span>
+        </li>
+        <li *ngIf="tasks.length === 0">
+            No hay tareas pendientes. ¡Añade una!
+        </li>
+    </ul>
+</div>
