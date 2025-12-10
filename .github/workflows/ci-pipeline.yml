@@ -42,5 +42,5 @@ jobs:
       working-directory: todo-frontend # Especificar dónde ejecutar el comando
 
     - name: Build Frontend (Angular)
-      run: ng build --configuration production # Compilar la aplicación para producción
+      run: npx ng build --configuration production # Compilar la aplicación para producción
       working-directory: todo-frontend
