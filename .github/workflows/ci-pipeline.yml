@@ -23,10 +23,10 @@ jobs:
         dotnet-version: '8.0.x' # Asegúrate de que esta versión coincida con la que usaste
 
     - name: Restore dependencies (Backend)
-      run: dotnet restore ./TodoApi/TodoApi.csproj # Restaurar paquetes de .NET
+      run: dotnet restore ./ToDoApi/ToDoApi.csproj # Restaurar paquetes de .NET
 
     - name: Build Backend (API)
-      run: dotnet build ./TodoApi/TodoApi.csproj --configuration Release --no-restore # Compilar el backend
+      run: dotnet build ./ToDoApi/ToDoApi.csproj --configuration Release --no-restore # Compilar el backend
 
     # --- Configuración para el Frontend de Angular ---
     - name: Set up Node.js
