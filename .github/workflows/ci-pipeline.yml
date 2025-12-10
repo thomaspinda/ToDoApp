@@ -1,0 +1,46 @@
+# Nombre de tu Pipeline
+name: CI Multi-Stack (Angular & .NET)
+
+# Cuándo debe ejecutarse este workflow
+on:
+  push:
+    branches: [ "main" ] # Se activa en cada 'push' a la rama 'main'
+  pull_request:
+    branches: [ "main" ] # También se activa cuando hay una solicitud de pull request
+
+# Definición de un 'job' de construcción
+jobs:
+  build:
+    runs-on: ubuntu-latest # Ejecutar en un servidor virtual de Ubuntu
+
+    steps:
+    - uses: actions/checkout@v4 # 1. Obtener el código del repositorio
+
+    # --- Configuración para el Backend de .NET Core ---
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # Asegúrate de que esta versión coincida con la que usaste
+
+    - name: Restore dependencies (Backend)
+      run: dotnet restore ./TodoApi/TodoApi.csproj # Restaurar paquetes de .NET
+
+    - name: Build Backend (API)
+      run: dotnet build ./TodoApi/TodoApi.csproj --configuration Release --no-restore # Compilar el backend
+
+    # --- Configuración para el Frontend de Angular ---
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x # Usar una versión LTS de Node
+
+    - name: Navigate to Frontend Directory
+      run: cd todo-frontend # Cambiar al directorio del frontend
+
+    - name: Install Frontend Dependencies
+      run: npm install # Instalar los paquetes de Node de Angular
+      working-directory: todo-frontend # Especificar dónde ejecutar el comando
+
+    - name: Build Frontend (Angular)
+      run: ng build --configuration production # Compilar la aplicación para producción
+      working-directory: todo-frontend
