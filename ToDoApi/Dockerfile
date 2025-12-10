@@ -4,7 +4,7 @@ WORKDIR /src
 COPY ["ToDoApi.csproj", "./"]
 RUN dotnet restore "./ToDoApi.csproj"
 COPY . .
-RUN dotnet build "TodoApi.csproj" -c Release -o /app/build
+RUN dotnet build "ToDoApi.csproj" -c Release -o /app/build
 
 #Imagen de tiempo de ejecucion (Runtime) para el despliegue final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
